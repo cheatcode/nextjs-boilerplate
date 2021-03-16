@@ -1,0 +1,19 @@
+query documents {
+  documents {
+    _id
+    title
+    status
+    createdAt
+    updatedAt
+  }
+}
+
+query document($documentId: ID!) {
+  document(documentId: $documentId) {
+    _id
+    title
+    status
+    updatedAt
+    content
+  }
+}

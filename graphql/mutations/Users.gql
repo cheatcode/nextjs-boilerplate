@@ -1,0 +1,52 @@
+mutation login($emailAddress: String!, $password: String!) {
+  login(emailAddress: $emailAddress, password: $password) {
+    _id
+    emailAddress
+    name {
+      first
+      last
+    }
+  }
+}
+
+mutation signup($user: UserInput!) {
+  signup(user: $user) {
+    _id
+    emailAddress
+    name {
+      first
+      last
+    }
+  }
+}
+
+mutation loginWithToken {
+  loginWithToken {
+    _id
+    emailAddress
+    name {
+      first
+      last
+    }
+  }
+}
+
+mutation recoverPassword($emailAddress: String!) {
+  recoverPassword(emailAddress: $emailAddress)
+}
+
+mutation resetPassword(
+  $token: String!
+  $newPassword: String!
+  $repeatNewPassword: String!
+) {
+  resetPassword(
+    token: $token
+    newPassword: $newPassword
+    repeatNewPassword: $repeatNewPassword
+  )
+}
+
+mutation logout {
+  logout
+}

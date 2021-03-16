@@ -1,0 +1,17 @@
+mutation createDocument($document: DocumentInput!) {
+  createDocument(document: $document) {
+    _id
+  }
+}
+
+mutation updateDocument($documentId: ID!, $document: DocumentInput!) {
+  updateDocument(documentId: $documentId, document: $document) {
+    _id
+  }
+}
+
+mutation deleteDocument($documentId: ID!) {
+  deleteDocument(documentId: $documentId) {
+    _id
+  }
+}
