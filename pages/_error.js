@@ -1,24 +1,21 @@
 import React from "react";
 import { useRouter } from "next/router";
+import BlankState from "../components/BlankState";
 
-const Error = (props) => {
+const Error = () => {
   const router = useRouter();
 
   return (
-    <>
-      <div className="blank-state transparent">
-        <h5>Page Not Found</h5>
-        <p>
-          This page does not exist. Please double-check the URL and try again.
-        </p>
-        <button
-          className="button button-primary"
-          onClick={() => router.push("/")}
-        >
-          Go Back to Home
-        </button>
-      </div>
-    </>
+    <BlankState
+      bordered
+      title="Page Not Found"
+      subtitle="This page does not exist. Please double-check the URL and try again."
+      action={{
+        style: "primary",
+        label: "Go Back to Home",
+        onClick: () => router.push("/"),
+      }}
+    />
   );
 };
 

@@ -1,9 +1,7 @@
 import React, { useState, useEffect } from "react";
-import PropTypes from "prop-types";
 import { useRouter } from "next/router";
-import { useQuery, useMutation } from "@apollo/client";
+import { useQuery } from "@apollo/client";
 import { document as documentQuery } from "../../../graphql/queries/Documents.gql";
-import { updateDocument as updateDocumentMutation } from "../../../graphql/mutations/Documents.gql";
 
 import { StyledViewDocument } from "./styles";
 
@@ -26,7 +24,7 @@ const ViewDocument = () => {
       <div className="page-header">
         <h5>{title}</h5>
         <button
-          className="button button-primary"
+          className="btn btn-primary"
           onClick={() => router.push(`/documents/${documentId}/edit`)}
         >
           Edit Document

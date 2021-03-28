@@ -44,7 +44,7 @@ class ValidatedForm extends React.Component {
 }
 
 ValidatedForm.propTypes = {
-  // prop: PropTypes.string.isRequired,
+  children: PropTypes.node.isRequired,
 };
 
 export default ValidatedForm;

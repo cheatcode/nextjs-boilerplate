@@ -1,77 +1,110 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { useRouter } from "next/router";
 import { connect } from "react-redux";
 import { useMutation } from "@apollo/client";
-import PropTypes from "prop-types";
 import Link from "next/link";
 import { logout as logoutMutation } from "../../graphql/mutations/Users.gql";
-import NavigationLink from "../NavigationLink";
 
 const Navigation = ({ user, logoutOnClient }) => {
   const router = useRouter();
-  const [navigationOpen, setNavigationOpen] = useState(false);
   const [logoutOnServer] = useMutation(logoutMutation);
 
-  const handleRouteChange = () => {
-    setNavigationOpen(false);
-  };
-
-  const handleLogout = () => {
+  const handleLogout = (event) => {
+    event.stopPropagation();
     logoutOnServer().then(() => {
       logoutOnClient();
       router.push("/login");
     });
   };
 
-  useEffect(() => {
-    router.events.on("routeChangeStart", handleRouteChange);
-
-    return () => {
-      router.events.off("routeChangeStart", handleRouteChange);
-    };
-  }, []);
-
   return (
-    <div className={`navigation ${navigationOpen ? "open" : ""}`}>
+    <nav className="navbar navbar-expand-lg navbar-light bg-light">
       <div className="container">
-        <Link href="/" passHref>
-          <a className="brand">App</a>
+        <Link href="/">
+          <a className="navbar-brand" href="#">
+            App
+          </a>
         </Link>
-        <i
-          className="fas fa-bars"
-          onClick={() => setNavigationOpen(!navigationOpen)}
-        />
-        <div className="navigation-items">
+        <button
+          className="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarNav"
+          aria-controls="navbarNav"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span className="navbar-toggler-icon"></span>
+        </button>
+        <div className="collapse navbar-collapse" id="navbarNav">
           {user && (
-            <ul>
-              <NavigationLink href="/documents">Documents</NavigationLink>
+            <ul className="navbar-nav">
+              <li className="nav-item">
+                <Link href="/documents">
+                  <a
+                    className={`nav-link ${
+                      "/documents" === router.pathname ? "active" : ""
+                    }`}
+                  >
+                    Documents
+                  </a>
+                </Link>
+              </li>
             </ul>
           )}
           {user ? (
-            <ul className="navigation-right">
-              <li className="dropdown">
-                <span>
-                  {user && user.emailAddress}{" "}
-                  <i className="fas fa-chevron-down" />
-                </span>
-                <ul className="dropdown">
-                  <li onClick={handleLogout}>Logout</li>
+            <ul className="navbar-nav ms-auto">
+              <li className="nav-item dropdown">
+                <a
+                  href="#"
+                  className="nav-link dropdown-toggle"
+                  id="navbarDropdown"
+                  role="button"
+                  data-bs-toggle="dropdown"
+                  aria-expanded="false"
+                >
+                  {user && user.emailAddress}
+                </a>
+                <ul className="dropdown-menu" aria-labelledby="navbarDropdown">
+                  <li onClick={handleLogout}>
+                    <a href="#" className="dropdown-item">
+                      Logout
+                    </a>
+                  </li>
                 </ul>
               </li>
             </ul>
           ) : (
-            <ul className="navigation-right">
-              <NavigationLink href="/login">Login</NavigationLink>
-              <NavigationLink href="/signup">Signup</NavigationLink>
+            <ul className="navbar-nav ms-auto">
+              <li className="nav-item">
+                <Link href="/login">
+                  <a
+                    className={`nav-link ${
+                      "/login" === router.pathname ? "active" : ""
+                    }`}
+                  >
+                    Login
+                  </a>
+                </Link>
+              </li>
+              <li className="nav-item">
+                <Link href="/signup">
+                  <a
+                    className={`nav-link ${
+                      "/signup" === router.pathname ? "active" : ""
+                    }`}
+                  >
+                    Signup
+                  </a>
+                </Link>
+              </li>
             </ul>
           )}
         </div>
       </div>
-    </div>
+    </nav>
   );
 };
-
-Navigation.propTypes = {};
 
 export default connect(
   (state) => ({

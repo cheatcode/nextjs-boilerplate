@@ -1,12 +1,12 @@
-import React, { useEffect } from "react";
-import PropTypes from "prop-types";
+import React from "react";
 import { useRouter } from "next/router";
 import { useQuery } from "@apollo/client";
 import Link from "next/link";
 import { documents as documentsQuery } from "../../graphql/queries/Documents.gql";
 import GraphQLError from "../../components/GraphQLError";
 import Loading from "../../components/Loading";
-import { monthDayYear, monthDayYearAtTime } from "../../lib/dates";
+import BlankState from "../../components/BlankState";
+import { monthDayYear } from "../../lib/dates";
 
 const Documents = () => {
   const router = useRouter();
@@ -19,11 +19,9 @@ const Documents = () => {
   return (
     <>
       <div className="page-header">
-        <div>
-          <h4>Documents</h4>
-        </div>
+        <h5>Documents</h5>
         <button
-          className="button button-primary"
+          className="btn btn-primary"
           onClick={() => router.push(`/documents/create`)}
         >
           Create Document
@@ -31,11 +29,11 @@ const Documents = () => {
       </div>
       {loading && <Loading />}
       {!loading && data.documents && data.documents.length > 0 && (
-        <div className="table striped">
-          <table>
+        <div className="table-responsive">
+          <table className="table">
             <thead>
               <tr>
-                <th>Document Title</th>
+                <th>Title</th>
                 <th className="text-center">Created At</th>
                 <th className="text-center">Updated At</th>
                 <th />
@@ -44,7 +42,7 @@ const Documents = () => {
             <tbody>
               {data.documents.map(({ _id, title, createdAt, updatedAt }) => {
                 return (
-                  <tr key={_id}>
+                  <tr key={_id} className="align-middle">
                     <td>
                       <Link href={`/documents/${_id}`}>{title}</Link>
                     </td>
@@ -52,7 +50,7 @@ const Documents = () => {
                     <td className="text-center">{monthDayYear(updatedAt)}</td>
                     <td className="text-center">
                       <button
-                        className="button button-primary button-small"
+                        className="btn btn-primary btn-sm"
                         onClick={() => router.push(`/documents/${_id}/edit`)}
                       >
                         Edit
@@ -66,19 +64,16 @@ const Documents = () => {
         </div>
       )}
       {!loading && data.documents && data.documents.length === 0 && (
-        <div className="blank-state dashed">
-          <h5>No Documents Here.</h5>
-          <p>
-            To create your first document, click the button below. Once you
-            create a document, it will appear here.
-          </p>
-          <button
-            className="button button-primary"
-            onClick={() => router.push(`/documents/create`)}
-          >
-            Create Document
-          </button>
-        </div>
+        <BlankState
+          bordered
+          title="No Documents Here."
+          subtitle="To create your first document, click the button below. Once you create a document, it will appear here."
+          action={{
+            style: "primary",
+            label: "Create Document",
+            onClick: () => router.push(`/documents/create`),
+          }}
+        />
       )}
     </>
   );
