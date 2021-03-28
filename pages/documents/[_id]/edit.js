@@ -6,6 +6,7 @@ import {
   updateDocument as updateDocumentMutation,
   deleteDocument as deleteDocumentMutation,
 } from "../../../graphql/mutations/Documents.gql";
+import ValidatedForm from "../../../components/ValidatedForm";
 
 import { StyledUpdateDocument } from "./styles";
 
@@ -25,9 +26,7 @@ const UpdateDocument = () => {
     }
   }, [data]);
 
-  const handleUpdateDocument = (event) => {
-    event.preventDefault();
-
+  const handleUpdateDocument = () => {
     updateDocument({
       variables: {
         documentId: router.query && router.query._id,
@@ -73,49 +72,69 @@ const UpdateDocument = () => {
 
   return (
     <StyledUpdateDocument>
-      <form onSubmit={handleUpdateDocument}>
-        <div className="row">
-          <div className="col-xs-12">
-            <div className="mb-3">
-              <label className="form-label">Document Title</label>
-              <input
-                className="form-control"
-                type="text"
-                name="title"
-                value={title}
-                onChange={(event) => setTitle(event.target.value)}
-                placeholder="Document Title"
-              />
+      <ValidatedForm
+        rules={{
+          title: {
+            required: true,
+          },
+          content: {
+            required: true,
+          },
+        }}
+        messages={{
+          title: {
+            required: "Title is required.",
+          },
+          content: {
+            required: "Content is required.",
+          },
+        }}
+        onSubmit={handleUpdateDocument}
+      >
+        <form>
+          <div className="row">
+            <div className="col-xs-12">
+              <div className="mb-3">
+                <label className="form-label">Document Title</label>
+                <input
+                  className="form-control"
+                  type="text"
+                  name="title"
+                  value={title}
+                  onChange={(event) => setTitle(event.target.value)}
+                  placeholder="Document Title"
+                />
+              </div>
             </div>
           </div>
-        </div>
-        <div className="row">
-          <div className="col-xs-12">
-            <div className="mb-4">
-              <label className="form-label">Document Content</label>
-              <textarea
-                className="form-control"
-                name="content"
-                value={content}
-                onChange={(event) => setContent(event.target.value)}
-                placeholder="Document Content"
-              />
+          <div className="row">
+            <div className="col-xs-12">
+              <div className="mb-4">
+                <label className="form-label">Document Content</label>
+                <textarea
+                  className="form-control"
+                  name="content"
+                  value={content}
+                  onChange={(event) => setContent(event.target.value)}
+                  placeholder="Document Content"
+                />
+              </div>
             </div>
           </div>
-        </div>
-        <footer>
-          <button type="submit" className="btn btn-primary">
-            Update Document
-          </button>
-          <button
-            type="button"
-            className="btn btn-danger ms-auto"
-            onClick={handleDeleteDocument}
-          >
-            Delete
-          </button>
-        </footer>
-      </form>
+          <footer>
+            <button type="submit" className="btn btn-primary">
+              Update Document
+            </button>
+            <button
+              type="button"
+              className="btn btn-danger ms-auto"
+              onClick={handleDeleteDocument}
+            >
+              Delete
+            </button>
+          </footer>
+        </form>
+      </ValidatedForm>
     </StyledUpdateDocument>
   );
 };
