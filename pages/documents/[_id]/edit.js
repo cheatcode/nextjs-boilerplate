@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import PropTypes from "prop-types";
 import { useRouter } from "next/router";
 import { useQuery, useMutation } from "@apollo/client";
 import { document as documentQuery } from "../../../graphql/queries/Documents.gql";
@@ -77,10 +76,10 @@ const UpdateDocument = () => {
       <form onSubmit={handleUpdateDocument}>
         <div className="row">
           <div className="col-xs-12">
-            <div className="field">
-              <label className="input-label">Document Title</label>
+            <div className="mb-3">
+              <label className="form-label">Document Title</label>
               <input
-                className="input"
+                className="form-control"
                 type="text"
                 name="title"
                 value={title}
@@ -92,10 +91,10 @@ const UpdateDocument = () => {
         </div>
         <div className="row">
           <div className="col-xs-12">
-            <div className="field">
-              <label className="input-label">Document Content</label>
+            <div className="mb-4">
+              <label className="form-label">Document Content</label>
               <textarea
-                className="input"
+                className="form-control"
                 name="content"
                 value={content}
                 onChange={(event) => setContent(event.target.value)}
@@ -105,12 +104,12 @@ const UpdateDocument = () => {
           </div>
         </div>
         <footer>
-          <button type="submit" className="button button-success">
+          <button type="submit" className="btn btn-primary">
             Update Document
           </button>
           <button
             type="button"
-            className="button button-danger"
+            className="btn btn-danger ms-auto"
             onClick={handleDeleteDocument}
           >
             Delete

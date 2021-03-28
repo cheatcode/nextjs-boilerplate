@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import PropTypes from "prop-types";
 import { useRouter } from "next/router";
 import { useMutation } from "@apollo/client";
 import { createDocument as createDocumentMutation } from "../../graphql/mutations/Documents.gql";
@@ -42,10 +41,10 @@ const CreateDocument = () => {
       <form onSubmit={handleSubmit}>
         <div className="row">
           <div className="col-xs-12">
-            <div className="field">
-              <label className="input-label">Document Title</label>
+            <div className="mb-3">
+              <label className="form-label">Document Title</label>
               <input
-                className="input"
+                className="form-control"
                 type="text"
                 name="title"
                 value={title}
@@ -57,10 +56,10 @@ const CreateDocument = () => {
         </div>
         <div className="row">
           <div className="col-xs-12">
-            <div className="field">
-              <label className="input-label">Document Content</label>
+            <div className="mb-4">
+              <label className="form-label">Document Content</label>
               <textarea
-                className="input"
+                className="form-control"
                 name="content"
                 value={content}
                 onChange={(event) => setContent(event.target.value)}
@@ -69,7 +68,7 @@ const CreateDocument = () => {
             </div>
           </div>
         </div>
-        <button type="submit" className="button button-success">
+        <button type="submit" className="btn btn-primary">
           Create Document
         </button>
       </form>

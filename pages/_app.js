@@ -6,9 +6,9 @@ import { ApolloProvider } from "@apollo/client";
 import Navigation from "../components/Navigation";
 import loginWithToken from "../lib/users/loginWithToken";
 import store from "../lib/store";
-import pong from "../lib/pong";
 import client from "../graphql/client";
 
+import "bootstrap/dist/css/bootstrap.min.css";
 import "../styles/styles.css";
 
 class App extends React.Component {

@@ -8,18 +8,17 @@ Front-end boilerplate for building web applications, based on [Next.js](https://
 
 0. [Who is This For?](#who-is-this-for)
 1. [Introduction](#introduction)
-    - [CSS Framework](#css-framework)
 2. [Getting Started](#getting-started)
 3. [File Structure](#file-structure)
 4. [Pages & Components](#pages-components)
-    - [Pages](#pages)
-      - [Route Pages](#route-pages)
-      - [Nested Pages](#nested-pages)
-      - [Parameter Pages](#parameter-pages)
-      - [Base Pages](#base-pages)
-    - [Components](#components)
-      - [Class-Based vs. Functional Components](#class-Based-vs-functional-components)
-      - [Forms](#forms)
+   - [Pages](#pages)
+     - [Route Pages](#route-pages)
+     - [Nested Pages](#nested-pages)
+     - [Parameter Pages](#parameter-pages)
+     - [Base Pages](#base-pages)
+   - [Components](#components)
+     - [Class-Based vs. Functional Components](#class-Based-vs-functional-components)
+     - [Forms](#forms)
 5. [Styles](#styles)
 6. [GraphQL](#graphql)
 7. [Accounts](#accounts)
@@ -43,11 +42,11 @@ Beyond this, it's also intended as a starting point for your product or service.
 <p style="margin:0;">While you can use any back-end or API you wish with the boilerplate, by default, it's wired to work with the <a href="https://github.com/cheatcode/nodejs-server-boilerplate">CheatCode Node.js Boilerplate</a>.</p>
 </blockquote>
 
-
 This boilerplate was created to server as a starting point for the front-end of a web application. It leverages Next.js to handle rendering components, routing, and bundling of application code.
 
 On top of this, additional features are added to speed up your development process, including:
 
+- Bootstrap v5 for CSS
 - Styling via styled-components (w/ SSR support)
 - A fully-wired accounts UI with signup, login, recover password, and reset password
 - A fully-wired GraphQL client with pattern for managing mutations and queries on the client
@@ -57,20 +56,6 @@ On top of this, additional features are added to speed up your development proce
 - A pattern for managing and accessing environment-specific settings
 - Easy form validation with helper component
 - Alerts system for easy feedback and error reporting
-
-#### CSS Framework
-
-By default, the Next.js Boilerplate uses a minimal example CSS framework on the client, based on an upcoming CSS framework from CheatCode.
-
-While this framework will work for simple, CRUD-style applications, if you need a more advanced suite of components, it's recommended that you implement a more developed CSS framework.
-
-Recommended Frameworks to Try:
-
-- [Tailwind CSS](https://tailwindcss.com/)
-- [Bootstrap](https://getbootstrap.com/)
-- [Ant](https://ant.design/)
-- [Bulma](https://bulma.io/)
-
 
 ### Getting Started
 
@@ -165,8 +150,6 @@ While the boilerplate does primarily rely on the standard file structure of a Ne
 │   ├── settings-development.js
 │   └── ** settings-production.js
 ├── /styles
-│   ├── framework.css
-│   ├── grid.css
 │   ├── pong.css
 │   └── styles.css
 ├── .gitignore
@@ -187,7 +170,6 @@ For components, there are two conventions in use: the standard `/pages` director
 
 There are two types of pages in the boilerplate: route pages and base pages. Route pages describe the page components contained in each of the folders inside the `/pages` directory.
 
-
 ##### Route Pages
 
 Route pages is a generic term used to describe the pages rendered by Next.js, located in the folders within the `/pages` directory. These folders (and the files they contain) map to the current URL in the browser. Behind the scenes, Next.js automatically maps the browser's URL to the folder with the corresponding name for you.
@@ -204,7 +186,7 @@ This introduces an important convention in Next.js, nested routes and parameters
 
 Here, like we saw above, the `index.js` file is accessed via the URL `http://localhost:5000/documents`. Conversely, the URL `http://localhost:5000/documents/create` maps to the `create.js` file.
 
-While the `styles.js` file here does technically map to the URL `http://localhost:5000/documents/styles`, its intent is _not_ to be a rendered page, but instead to hold the [styled-components]() CSS code for the pages in the `/pages/documents` folder. **This is a boilerplate-specific convention, not a Next.js convention**.
+While the `styles.js` file here does technically map to the URL `http://localhost:5000/documents/styles`, its intent is _not_ to be a rendered page, but instead to hold the [styled-components](https://styled-components.com/docs) CSS code for the pages in the `/pages/documents` folder. **This is a boilerplate-specific convention, not a Next.js convention**.
 
 ###### Parameter Pages
 
@@ -233,10 +215,9 @@ What's neat about parameterized pages is that you can place any word inbetween t
 import Router from 'next/router';
 
 const nameOfPizza = Router.query.pizza;
-``` 
+```
 
 Or, with hooks:
-
 
 ```
 import { useRouter } from 'next/router';
@@ -248,7 +229,6 @@ const Pizza = () => {
 ```
 
 **Note:** the difference here is purly cosmetic and a matter of preference. Both methods return the same result.
-
 
 ##### Base Pages
 
@@ -306,7 +286,7 @@ class MyComponent extends React.Component {
 
   render() {
     const { emailAddress, password } = this.state;
- 
+
     return (
       <ValidateForm
         rules={{
@@ -353,7 +333,7 @@ class MyComponent extends React.Component {
     );
   }
 };
-```  
+```
 
 Here, the `<ValidateForm />` component takes three props:
 
@@ -361,7 +341,7 @@ Here, the `<ValidateForm />` component takes three props:
 - `messages` - Set to an object cotaning properties which descibre the validation rules for the form. Each property represents a single field by its `name` attribute. Each property is assigned to an object containing the validation rules for the field with its values set to error strings that should be displayed when a rule fails validation.
 - `onSubmit` - Once validation is passed, the function to be called. This replaces the `onSubmit` attribute for the `<form></form>` tag.
 
-As a user interacts with the form, the validation is run, displaying any errors beneath the input and highlighting the input with an `error` class (this is given a red border as part of the CSS framework built in to the boilerplate).
+As a user interacts with the form, the validation is run, displaying any errors beneath the input and highlighting the input with an `error` class.
 
 ### Styles
 
@@ -435,16 +415,6 @@ In addition to this, the decision to separate is also based on scalability and a
 
 Finally, this choice was made in an effort to help the developers we teach. We want to encourage less dependence on specific stacks/frameworks and help developers to focus on their ability to adapt to _any_ JavaScript-based stack. Separating out the pieces invites just enough discomfort to help push our audience's skillset that much further.
 
-**Why did you implement a custom CSS framework instead of using an existing one like Tailwind or Bootstrap?**
-
-A few reasons:
-
-First, long-term, there is a goal for CheatCode to offer its own, fully-featured CSS framework. What's included with the boilerplate today is considered an alpha of that and will evolve over time.
-
-Second, choosing a CSS framework is highly team and project-specific. To make this boilerplate more accessible for others, not committing to one of the currently popular options ensures a more inclusive development experience and a better learning experience for CheatCode's audience as we teach with multiple CSS frameworks.
-
-Finally, the included CSS framework consists of a single `framework.css` file located at `/styles/framework.css`. This file can be removed in seconds, effectively resetting the boilerplates styles with minimal effort.
-
 ### Contributing
 
 <blockquote>
@@ -455,7 +425,6 @@ Finally, the included CSS framework consists of a single `framework.css` file lo
 The primary goal of this project is to server as a foundation for tutorials and courses offered on [CheatCode](https://cheatcode.co). In order to offer a relatively consistent API, changes are limited to bug fixes and feature additions. As a result **limited contributions are accepted to this boilerplate**.
 
 While you're welcome to submit a pull request, likelihood of acceptance is limited. **If you have an idea for something you'd like to contribute, it's best to submit a Feature Request issue with a type of `proposal` in the issues tab of this repo**. There we can discuss the idea and any long-term considerations or changes before we greenlight the implementation.
-
 
 ### License
 

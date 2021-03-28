@@ -5,8 +5,4 @@ export const StyledCreateDocument = styled.div`
     min-height: 200px;
     resize: none;
   }
-
-  .button-success {
-    margin-top: 20px;
-  }
 `;
