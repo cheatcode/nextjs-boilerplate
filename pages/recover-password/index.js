@@ -1,11 +1,11 @@
-import React, { useState } from "react";
-import PropTypes from "prop-types";
+import React from "react";
 import { recoverPassword as recoverPasswordMutation } from "../../graphql/mutations/Users.gql";
-import UserForm from "../../components/UserForm";
 import ValidatedForm from "../../components/ValidatedForm";
 import pong from "../../lib/pong";
 import formatGraphqlError from "../../lib/formatGraphqlError";
 import client from "../../graphql/client";
+
+import StyledRecoverPassword from "./styles";
 
 class RecoverPassword extends React.Component {
   constructor(props) {
@@ -17,8 +17,6 @@ class RecoverPassword extends React.Component {
 
   handleRecoverPassword = () => {
     const { emailAddress } = this.state;
-
-    console.log("running");
 
     client
       .mutate({
@@ -41,47 +39,50 @@ class RecoverPassword extends React.Component {
     const { emailAddress } = this.state;
 
     return (
-      <UserForm>
-        <ValidatedForm
-          rules={{
-            emailAddress: {
-              required: true,
-              email: true,
-            },
-          }}
-          messages={{
-            emailAddress: {
-              required: "Email address is required.",
-              email: "Is this email valid?",
-            },
-          }}
-          onSubmit={() => {
-            this.handleRecoverPassword();
-          }}
-        >
-          <form>
-            <div className="field">
-              <label className="input-label">Email Address</label>
-              <input
-                type="text"
-                name="emailAddress"
-                className="input"
-                placeholder="Email Address"
-                value={emailAddress}
-                onChange={(event) =>
-                  this.setState({ emailAddress: event.target.value })
-                }
-              />
-            </div>
-            <button
-              type="submit"
-              className="button button-primary button-block"
+      <StyledRecoverPassword>
+        <div className="row">
+          <div className="col-xs-12 col-lg-5 col-xl-4">
+            <ValidatedForm
+              rules={{
+                emailAddress: {
+                  required: true,
+                  email: true,
+                },
+              }}
+              messages={{
+                emailAddress: {
+                  required: "Email address is required.",
+                  email: "Is this email valid?",
+                },
+              }}
+              onSubmit={() => {
+                this.handleRecoverPassword();
+              }}
             >
-              Request Password Reset
-            </button>
-          </form>
-        </ValidatedForm>
-      </UserForm>
+              <form>
+                <div className="mb-4">
+                  <label className="form-label">Email Address</label>
+                  <input
+                    type="text"
+                    name="emailAddress"
+                    className="form-control"
+                    placeholder="Email Address"
+                    value={emailAddress}
+                    onChange={(event) =>
+                      this.setState({ emailAddress: event.target.value })
+                    }
+                  />
+                </div>
+                <div className="d-grid">
+                  <button type="submit" className="btn btn-primary">
+                    Request Password Reset
+                  </button>
+                </div>
+              </form>
+            </ValidatedForm>
+          </div>
+        </div>
+      </StyledRecoverPassword>
     );
   }
 }

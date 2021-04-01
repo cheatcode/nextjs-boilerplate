@@ -1,12 +1,11 @@
 import styled from "styled-components";
 
 export default styled.div`
-  .input-label {
+  .form-label {
     display: flex;
+  }
 
-    a {
-      margin-left: auto;
-      font-weight: normal;
-    }
+  .form-label a {
+    color: var(--gray-2);
   }
 `;
