@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useRouter } from "next/router";
 import { useMutation } from "@apollo/client";
 import { createDocument as createDocumentMutation } from "../../graphql/mutations/Documents.gql";
+import authenticatedRoute from "../../components/AuthenticatedRoute";
 import ValidatedForm from "../../components/ValidatedForm";
 
 import { StyledCreateDocument } from "./styles";
@@ -97,4 +98,4 @@ const CreateDocument = () => {
 
 CreateDocument.propTypes = {};
 
-export default CreateDocument;
+export default authenticatedRoute(CreateDocument);

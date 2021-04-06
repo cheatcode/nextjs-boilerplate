@@ -1,9 +1,10 @@
 import React from "react";
 import Router from "next/router";
 import { resetPassword as resetPasswordMutation } from "../../graphql/mutations/Users.gql";
-import formatGraphqlError from "../../lib/formatGraphqlError";
+import publicRoute from "../../components/PublicRoute";
 import ValidatedForm from "../../components/ValidatedForm";
 import client from "../../graphql/client";
+import formatGraphqlError from "../../lib/formatGraphqlError";
 
 import StyledResetPassword from "./styles";
 
@@ -116,4 +117,4 @@ class ResetPassword extends React.Component {
 
 ResetPassword.propTypes = {};
 
-export default ResetPassword;
+export default publicRoute(ResetPassword);

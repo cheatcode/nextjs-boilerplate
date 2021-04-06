@@ -3,6 +3,7 @@ import { useRouter } from "next/router";
 import { useQuery } from "@apollo/client";
 import Link from "next/link";
 import { documents as documentsQuery } from "../../graphql/queries/Documents.gql";
+import authenticatedRoute from "../../components/AuthenticatedRoute";
 import GraphQLError from "../../components/GraphQLError";
 import Loading from "../../components/Loading";
 import BlankState from "../../components/BlankState";
@@ -81,4 +82,4 @@ const Documents = () => {
 
 Documents.propTypes = {};
 
-export default Documents;
+export default authenticatedRoute(Documents);

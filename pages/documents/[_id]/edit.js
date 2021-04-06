@@ -6,6 +6,7 @@ import {
   updateDocument as updateDocumentMutation,
   deleteDocument as deleteDocumentMutation,
 } from "../../../graphql/mutations/Documents.gql";
+import authenticatedRoute from "../../../components/AuthenticatedRoute";
 import ValidatedForm from "../../../components/ValidatedForm";
 
 import { StyledUpdateDocument } from "./styles";
@@ -141,4 +142,4 @@ const UpdateDocument = () => {
 
 UpdateDocument.propTypes = {};
 
-export default UpdateDocument;
+export default authenticatedRoute(UpdateDocument);

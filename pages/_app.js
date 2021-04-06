@@ -59,7 +59,7 @@ class App extends React.Component {
 }
 
 App.propTypes = {
-  Component: PropTypes.object.isRequired,
+  Component: PropTypes.oneOfType([PropTypes.func, PropTypes.object]).isRequired,
   pageProps: PropTypes.object.isRequired,
 };
 
