@@ -15,7 +15,7 @@ Front-end boilerplate for building web applications, based on [Next.js](https://
      - [Route Pages](#route-pages)
      - [Nested Pages](#nested-pages)
      - [Parameter Pages](#parameter-pages)
-     - [Authenticated &amp; Public Pages](#authenticated-public-pages)
+     - [Authenticated &amp; Public Pages](#authenticated--public-pages)
      - [Base Pages](#base-pages)
    - [Components](#components)
      - [Class-Based vs. Functional Components](#class-Based-vs-functional-components)
