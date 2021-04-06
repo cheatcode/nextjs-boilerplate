@@ -84,6 +84,8 @@ While the boilerplate does primarily rely on the standard file structure of a Ne
 
 ```
 ├── /components
+│   ├── /AuthenticatedRoute
+│   │   └── index.js
 │   ├── /GraphQLError
 │   │   ├── index.js
 │   │   └── styles.js
@@ -93,6 +95,8 @@ While the boilerplate does primarily rely on the standard file structure of a Ne
 │   ├── /Navigation
 │   │   └── index.js
 │   ├── /NavigationLink
+│   │   └── index.js
+│   ├── /PublicRoute
 │   │   └── index.js
 │   ├── /SEO
 │   │   └── index.js
