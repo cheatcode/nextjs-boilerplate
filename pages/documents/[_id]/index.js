@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import { useQuery } from "@apollo/client";
 import { document as documentQuery } from "../../../graphql/queries/Documents.gql";
+import authenticatedRoute from "../../../components/AuthenticatedRoute";
 
 import { StyledViewDocument } from "./styles";
 
@@ -37,4 +38,4 @@ const ViewDocument = () => {
 
 ViewDocument.propTypes = {};
 
-export default ViewDocument;
+export default authenticatedRoute(ViewDocument);

@@ -37,7 +37,7 @@ BlankState.defaultProps = {
 };
 
 BlankState.propTypes = {
-  dashed: false,
+  dashed: PropTypes.bool,
   bordered: PropTypes.bool,
   transparent: PropTypes.bool,
   title: PropTypes.string.isRequired,

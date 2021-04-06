@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import Link from "next/link";
 import Router from "next/router";
+import publicRoute from "../../components/PublicRoute";
 import ValidatedForm from "../../components/ValidatedForm";
 import login from "../../lib/users/login";
 import pong from "../../lib/pong";
@@ -121,4 +122,4 @@ Login.propTypes = {
 
 export default connect(null, (dispatch) => ({
   loginOnClient: (user) => dispatch({ type: "LOGIN", user }),
-}))(Login);
+}))(publicRoute(Login));

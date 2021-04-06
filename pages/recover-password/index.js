@@ -1,5 +1,6 @@
 import React from "react";
 import { recoverPassword as recoverPasswordMutation } from "../../graphql/mutations/Users.gql";
+import publicRoute from "../../components/PublicRoute";
 import ValidatedForm from "../../components/ValidatedForm";
 import pong from "../../lib/pong";
 import formatGraphqlError from "../../lib/formatGraphqlError";
@@ -89,4 +90,4 @@ class RecoverPassword extends React.Component {
 
 RecoverPassword.propTypes = {};
 
-export default RecoverPassword;
+export default publicRoute(RecoverPassword);

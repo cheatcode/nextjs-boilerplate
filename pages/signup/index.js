@@ -2,6 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import Router from "next/router";
+import publicRoute from "../../components/PublicRoute";
 import ValidatedForm from "../../components/ValidatedForm";
 import signup from "../../lib/users/signup";
 import formatGraphqlError from "../../lib/formatGraphqlError";
@@ -165,4 +166,4 @@ Signup.propTypes = {
 
 export default connect(null, (dispatch) => ({
   loginOnClient: (user) => dispatch({ type: "LOGIN", user }),
-}))(Signup);
+}))(publicRoute(Signup));

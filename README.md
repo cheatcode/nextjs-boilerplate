@@ -15,6 +15,7 @@ Front-end boilerplate for building web applications, based on [Next.js](https://
      - [Route Pages](#route-pages)
      - [Nested Pages](#nested-pages)
      - [Parameter Pages](#parameter-pages)
+     - [Authenticated &amp; Public Pages](#authenticated-public-pages)
      - [Base Pages](#base-pages)
    - [Components](#components)
      - [Class-Based vs. Functional Components](#class-Based-vs-functional-components)
@@ -229,6 +230,63 @@ const Pizza = () => {
 ```
 
 **Note:** the difference here is purly cosmetic and a matter of preference. Both methods return the same result.
+
+##### Authenticated &amp; Public Pages
+
+If you want to define routes and handle redirects based on a user's logged in or logged out status, you can use the `<AuthenticatedRoute />` or `<PublicRoute />` HOCs (higer-order components).
+
+These components are nearly identical, with the sole difference being that `<AuthenticatedRoute />` ensures that a logged in user is _present_ before rendering the component passed to it. Conversely, the `<PublicRoute />` component ensures that a logged in user is _not_ present before rendering the component passed to it (useful for redirecting away from accounts-related pages like `/signup`).
+
+Usage of these two components is handled by importing one of the components into an existing page component folder (e.g., in this boilerplate, `/pages/login/index.js`) and then "wrapping" it around the `export` of that component at the bottom of the file:
+
+```javascript
+import React from "react";
+[...]
+import authenticatedRoute from "../../components/AuthenticatedRoute";
+[...]
+
+const Documents = () => {
+  [...]
+};
+
+Documents.propTypes = {};
+
+export default authenticatedRoute(Documents);
+```
+
+Here, at the bottom, we export a call to `authenticatedRoute()` (the recommended way to case this is using camel-case), passing it our component, `Documents`. The `<PublicRoute />` HOC works in the exact same fashion:
+
+```javascript
+import React from "react";
+[...]
+import publicRoute from "../../components/PublicRoute";
+[...]
+
+const Login = () => {
+  [...]
+};
+
+Login.propTypes = {};
+
+export default publicRoute(Login);
+```
+
+For both the `publicRoute()` and `authenticatedRoute()` components, as a second argument (after the component), an options object can be passed. Currently, the `pathAfterFailure` option is the only options supported:
+
+```javascript
+import React from "react";
+[...]
+import publicRoute from "../../components/PublicRoute";
+[...]
+
+const Login = () => {
+  [...]
+};
+
+Login.propTypes = {};
+
+export default publicRoute(Login, { pathAfterFailure: '/some-authenticated-route' });
+```
 
 ##### Base Pages
 
