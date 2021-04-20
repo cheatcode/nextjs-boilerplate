@@ -43,7 +43,7 @@ Beyond this, it's also intended as a starting point for your product or service.
 <p style="margin:0;">While you can use any back-end or API you wish with the boilerplate, by default, it's wired to work with the <a href="https://github.com/cheatcode/nodejs-server-boilerplate">CheatCode Node.js Boilerplate</a>.</p>
 </blockquote>
 
-This boilerplate was created to server as a starting point for the front-end of a web application. It leverages Next.js to handle rendering components, routing, and bundling of application code.
+This boilerplate was created to serve as a starting point for the front-end of a web application. It leverages Next.js to handle rendering components, routing, and bundling of application code.
 
 On top of this, additional features are added to speed up your development process, including:
 
@@ -275,7 +275,7 @@ Login.propTypes = {};
 export default publicRoute(Login);
 ```
 
-For both the `publicRoute()` and `authenticatedRoute()` components, as a second argument (after the component), an options object can be passed. Currently, the `pathAfterFailure` option is the only options supported:
+For both the `publicRoute()` and `authenticatedRoute()` components, as a second argument (after the component), an options object can be passed. Currently, the `pathAfterFailure` option is the only option supported:
 
 ```javascript
 import React from "react";
@@ -326,7 +326,7 @@ Generally speaking, one of the more tedious and common parts of any app are form
 
 The `<ValidatedForm />` component in conjunction with the `/lib/validateForm.js` and `/lib/validators.js` files enables real-time form validation. The component is used as a convenience method for attaching the `validateForm.js` function to a form in a React component (`validateForm.js` is a custom, vanilla JavaScript library for running validation, written custom for the boilerplate).
 
-The underlying library `validateForm.js` uses JavaScript DOM manipulation to render error messages and validate the forms inputs. Validations can be implemented as you wish, but a series of built-in validators are included in the `/lib/validators.js` file which relies on the `validator` NPM package.
+The underlying library `validateForm.js` uses JavaScript DOM manipulation to render error messages and validate the form's inputs. Validations can be implemented as you wish, but a series of built-in validators are included in the `/lib/validators.js` file which relies on the `validator` NPM package.
 
 ###### <ValidateForm /> Usage
 
