@@ -3,6 +3,7 @@ const settings = {
     uri: "http://localhost:5001/api/graphql",
   },
   meta: {
+    rootUrl: "http://localhost:5000",
     title: "App",
     description: "The app description goes here.",
     social: {
