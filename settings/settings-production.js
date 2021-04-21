@@ -3,6 +3,7 @@ const settings = {
     uri: "",
   },
   meta: {
+    rootUrl: "",
     title: "App",
     description: "The app description goes here.",
     social: {

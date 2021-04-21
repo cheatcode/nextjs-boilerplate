@@ -17,6 +17,7 @@ Front-end boilerplate for building web applications, based on [Next.js](https://
      - [Parameter Pages](#parameter-pages)
      - [Authenticated &amp; Public Pages](#authenticated--public-pages)
      - [Base Pages](#base-pages)
+     - [Sitemap](#sitemap)
    - [Components](#components)
      - [Class-Based vs. Functional Components](#class-Based-vs-functional-components)
      - [Forms](#forms)
@@ -148,7 +149,8 @@ While the boilerplate does primarily rely on the standard file structure of a Ne
 │   ├── _app.js
 │   ├── _document.js
 │   ├── _error.js
-│   └── index.js
+│   ├── index.js
+│   └── sitemap.xml.js
 ├── /public
 ├── /settings
 │   ├── index.js
@@ -166,6 +168,8 @@ While the boilerplate does primarily rely on the standard file structure of a Ne
 ├── README.md
 └── yarn.lock
 ```
+
+Files flagged with a `**` are not included by default but assumed to be added by you later (depending on need).
 
 ### Pages & Components
 
@@ -305,6 +309,20 @@ A custom implementation of the `<App />` component in Next.js that includes a lo
 A custom implementation of the `<Document />` component in Next.js that includes the base HTML template for the boilerplate. Also includes server-side rendering handlers for styled-components in the page's `getInitialProps` method and basic HTML metadata for SEO purposes.
 
 > Hint: Check out the `<SEO />` component in the `/components` directory for a more detailed helper for rendering SEO metadata.
+
+##### Sitemap
+
+<blockquote>
+  <p><strong>Note:</strong> Make sure to set the <code>meta.rootUrl</code> value in the settings file to the domain where your app is running. The sitemap depends on this value for generating the URLs it returns to crawlers. This is already configured in <code>/setttings/settings-development.js</code> but needs to be replicated for each environment you support (e.g., staging, production) if you want those environments crawlable.</p>
+</blockquote>
+
+To help with improving the SEO of your app, the boilerplate includes a `sitemap.xml.js` file at `/pages/sitemap.xml.js`. This file is _technically_ a page component, though, its component doesn't render anything. Instead, it piggybacks on the Next.js `getServerSideProps()` method and hijacks the inbound HTTP request, converting the response's `Content-Type` header to be `text/xml`.
+
+Because Next.js creates routes based on file names in the `/pages` directory, by having `sitemap.xml.js` there, Next.js treats the `sitemap.xml` part as the route for that page (i.e., `http://localhost:5000/sitemap.xml`). The boilerplate utilizes this technique combined with setting the `Content-Type` header to "trick" browsers into thinking it's opening a `.xml` file on the server.
+
+By default, the Sitemap only pulls the top-level pages in the boilerplate, not any of the dynamic data. This is intentional because the example Documents query in the boilerplate relies on a logged-in user.
+
+If you'd like to see a good way to add dynamic data to the sitemap [read this tutorial on generating a dynamic sitemap](https://cheatcode.co/tutorials/how-to-generate-a-dynamic-sitemap-with-next-js#generating-dynamic-data-for-our-sitemap).
 
 #### Components
 
