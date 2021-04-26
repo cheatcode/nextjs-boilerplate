@@ -2,11 +2,11 @@ import React from "react";
 import { recoverPassword as recoverPasswordMutation } from "../../graphql/mutations/Users.gql";
 import publicRoute from "../../components/PublicRoute";
 import ValidatedForm from "../../components/ValidatedForm";
-import pong from "../../lib/pong";
-import formatGraphqlError from "../../lib/formatGraphqlError";
 import client from "../../graphql/client";
+import handleApolloResponse from "../../lib/handleApolloResponse";
+import pong from "../../lib/pong";
 
-import StyledRecoverPassword from "./styles";
+import StyledRecoverPassword from "./index.css";
 
 class RecoverPassword extends React.Component {
   constructor(props) {
@@ -26,13 +26,19 @@ class RecoverPassword extends React.Component {
           emailAddress,
         },
       })
-      .then(() => {
-        pong.success(
-          `Click the link in the email we just sent you to reset your password!`
-        );
-      })
-      .catch((error) => {
-        pong.danger(formatGraphqlError(error));
+      .then((response) => {
+        return handleApolloResponse({
+          queryName: "recoverPassword",
+          response,
+          onSuccess: () => {
+            pong.success(
+              `Click the link in the email we just sent you to reset your password!`
+            );
+          },
+          onError: (error) => {
+            pong.danger(error);
+          },
+        });
       });
   };
 

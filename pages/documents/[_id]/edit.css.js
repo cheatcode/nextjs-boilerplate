@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const StyledUpdateDocument = styled.div`
+export default styled.div`
   textarea {
     min-height: 200px;
     resize: none;
@@ -15,5 +15,3 @@ export const StyledUpdateDocument = styled.div`
     margin-left: auto;
   }
 `;
-
-export const StyledViewDocument = styled.div``;

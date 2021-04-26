@@ -110,7 +110,7 @@
   width: 16px;
   height: 16px;
   position: relative;
-  top: 1px;
+  top: -1px;
 }
 
 .pong-alert h5 {

@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-import StyledBlankState from "./styles";
+import StyledBlankState from "./index.css";
 
 const BlankState = ({
   dashed,

@@ -4,9 +4,11 @@ import { resetPassword as resetPasswordMutation } from "../../graphql/mutations/
 import publicRoute from "../../components/PublicRoute";
 import ValidatedForm from "../../components/ValidatedForm";
 import client from "../../graphql/client";
-import formatGraphqlError from "../../lib/formatGraphqlError";
+import handleApolloResponse from "../../lib/handleApolloResponse";
+import pong from "../../lib/pong";
 
-import StyledResetPassword from "./styles";
+import StyledResetPassword from "./[token].css";
+import formatGraphqlError from "../../lib/formatGraphqlError";
 
 class ResetPassword extends React.Component {
   constructor(props) {
@@ -29,15 +31,23 @@ class ResetPassword extends React.Component {
           repeatNewPassword,
         },
       })
-      .then(({ error }) => {
-        if (error) {
-          pong.danger(formatGraphqlError(error));
-        } else {
-          pong.success(
-            "Password reset! You can log back in with your new password."
-          );
-          Router.push(`/login`);
-        }
+      .then((response) => {
+        return handleApolloResponse({
+          queryName: "resetPassword",
+          response,
+          onSuccess: () => {
+            pong.success(
+              "Password reset! You can log back in with your new password."
+            );
+            Router.push(`/login`);
+          },
+          onError: (error) => {
+            pong.danger(error);
+          },
+        });
+      })
+      .catch((error) => {
+        pong.error(formatGraphqlError(error));
       });
   };
 

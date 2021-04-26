@@ -8,10 +8,12 @@ import {
 } from "../../../graphql/mutations/Documents.gql";
 import authenticatedRoute from "../../../components/AuthenticatedRoute";
 import ValidatedForm from "../../../components/ValidatedForm";
+import handleApolloResponse from "../../../lib/handleApolloResponse";
+import pong from "../../../lib/pong";
 
-import { StyledUpdateDocument } from "./styles";
+import StyledEditDocument from "./edit.css";
 
-const UpdateDocument = () => {
+const EditDocument = () => {
   const router = useRouter();
   const documentId = router.query && router.query._id;
   const [title, setTitle] = useState("");
@@ -37,14 +39,17 @@ const UpdateDocument = () => {
         },
       },
     })
-      .then(({ error, data }) => {
-        if (error) {
-          console.log(error);
-        }
-
-        if (data && data.updateDocument && data.updateDocument._id) {
-          router.push(`/documents/${data.updateDocument._id}`);
-        }
+      .then((response) => {
+        return handleApolloResponse({
+          queryName: "updateDocument",
+          response,
+          onSuccess: (data) => {
+            router.push(`/documents/${data._id}`);
+          },
+          onError: (error) => {
+            pong.danger(error);
+          },
+        });
       })
       .catch((error) => {
         console.log({ error });
@@ -72,7 +77,7 @@ const UpdateDocument = () => {
   };
 
   return (
-    <StyledUpdateDocument>
+    <StyledEditDocument>
       <ValidatedForm
         rules={{
           title: {
@@ -136,10 +141,10 @@ const UpdateDocument = () => {
           </footer>
         </form>
       </ValidatedForm>
-    </StyledUpdateDocument>
+    </StyledEditDocument>
   );
 };
 
-UpdateDocument.propTypes = {};
+EditDocument.propTypes = {};
 
-export default authenticatedRoute(UpdateDocument);
+export default authenticatedRoute(EditDocument);
