@@ -5,7 +5,7 @@ import { createDocument as createDocumentMutation } from "../../graphql/mutation
 import authenticatedRoute from "../../components/AuthenticatedRoute";
 import ValidatedForm from "../../components/ValidatedForm";
 
-import { StyledCreateDocument } from "./styles";
+import StyledCreateDocument from "./create.css";
 
 const CreateDocument = () => {
   const router = useRouter();

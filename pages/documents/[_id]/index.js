@@ -4,7 +4,7 @@ import { useQuery } from "@apollo/client";
 import { document as documentQuery } from "../../../graphql/queries/Documents.gql";
 import authenticatedRoute from "../../../components/AuthenticatedRoute";
 
-import { StyledViewDocument } from "./styles";
+import StyledViewDocument from "./index.css";
 
 const ViewDocument = () => {
   const router = useRouter();

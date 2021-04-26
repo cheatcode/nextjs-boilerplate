@@ -1,8 +1,8 @@
 import React from "react";
 
-import StyledLoading from "./styles";
+import StyledLoading from "./index.css";
 
-const Loading = ({ prop1, prop2 }) => (
+const Loading = () => (
   <StyledLoading>
     <svg
       width={135}

@@ -8,7 +8,7 @@ import ValidatedForm from "../../components/ValidatedForm";
 import login from "../../lib/users/login";
 import pong from "../../lib/pong";
 
-import StyledLogin from "./styles";
+import StyledLogin from "./index.css";
 import formatGraphqlError from "../../lib/formatGraphqlError";
 
 class Login extends React.Component {

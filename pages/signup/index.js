@@ -8,7 +8,7 @@ import signup from "../../lib/users/signup";
 import formatGraphqlError from "../../lib/formatGraphqlError";
 import pong from "../../lib/pong";
 
-import StyledSignup from "./styles";
+import StyledSignup from "./index.css";
 
 class Signup extends React.Component {
   constructor(props) {

@@ -9,6 +9,8 @@ import Loading from "../../components/Loading";
 import BlankState from "../../components/BlankState";
 import { monthDayYear } from "../../lib/dates";
 
+import StyledDocuments from "./index.css";
+
 const Documents = () => {
   const router = useRouter();
   const { loading, error, data } = useQuery(documentsQuery);
@@ -18,7 +20,7 @@ const Documents = () => {
   }
 
   return (
-    <>
+    <StyledDocuments>
       <div className="page-header">
         <h5>Documents</h5>
         <button
@@ -76,7 +78,7 @@ const Documents = () => {
           }}
         />
       )}
-    </>
+    </StyledDocuments>
   );
 };
 
