@@ -12,6 +12,14 @@ const settings = {
       twitter: "@cheatcodetuts",
     },
   },
+  routes: {
+    authenticated: {
+      pathAfterFailure: "/login",
+    },
+    public: {
+      pathAfterFailure: "/documents",
+    },
+  },
 };
 
 export default settings;
