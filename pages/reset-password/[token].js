@@ -6,7 +6,7 @@ import ValidatedForm from "../../components/ValidatedForm";
 import client from "../../graphql/client";
 import formatGraphqlError from "../../lib/formatGraphqlError";
 
-import StyledResetPassword from "./styles";
+import StyledResetPassword from "./[token].css";
 
 class ResetPassword extends React.Component {
   constructor(props) {

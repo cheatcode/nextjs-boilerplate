@@ -6,7 +6,7 @@ import pong from "../../lib/pong";
 import formatGraphqlError from "../../lib/formatGraphqlError";
 import client from "../../graphql/client";
 
-import StyledRecoverPassword from "./styles";
+import StyledRecoverPassword from "./index.css";
 
 class RecoverPassword extends React.Component {
   constructor(props) {

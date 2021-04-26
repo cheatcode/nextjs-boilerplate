@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-import StyledGraphQLError from "./styles";
+import StyledGraphQLError from "./index.css";
 
 const GraphQLError = ({ error }) => (
   <StyledGraphQLError>

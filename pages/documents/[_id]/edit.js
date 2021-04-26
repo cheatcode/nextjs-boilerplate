@@ -9,9 +9,9 @@ import {
 import authenticatedRoute from "../../../components/AuthenticatedRoute";
 import ValidatedForm from "../../../components/ValidatedForm";
 
-import { StyledUpdateDocument } from "./styles";
+import StyledEditDocument from "./edit.css";
 
-const UpdateDocument = () => {
+const EditDocument = () => {
   const router = useRouter();
   const documentId = router.query && router.query._id;
   const [title, setTitle] = useState("");
@@ -72,7 +72,7 @@ const UpdateDocument = () => {
   };
 
   return (
-    <StyledUpdateDocument>
+    <StyledEditDocument>
       <ValidatedForm
         rules={{
           title: {
@@ -136,10 +136,10 @@ const UpdateDocument = () => {
           </footer>
         </form>
       </ValidatedForm>
-    </StyledUpdateDocument>
+    </StyledEditDocument>
   );
 };
 
-UpdateDocument.propTypes = {};
+EditDocument.propTypes = {};
 
-export default authenticatedRoute(UpdateDocument);
+export default authenticatedRoute(EditDocument);
