@@ -8,6 +8,8 @@ import Navigation from "../components/Navigation";
 import loginWithToken from "../lib/users/loginWithToken";
 import store from "../lib/store";
 import client from "../graphql/client";
+import formatGraphqlError from "../lib/formatGraphqlError";
+import isClient from "../lib/isClient";
 
 import "bootstrap/dist/css/bootstrap.min.css";
 import pong from "./pong.css";
@@ -85,13 +87,17 @@ class App extends React.Component {
   };
 
   async componentDidMount() {
-    const user = typeof window !== "undefined" ? await loginWithToken() : null;
-
-    if (user && user._id) {
-      store.dispatch({
-        type: "LOGIN",
-        authenticated: user && !!user._id,
-        user,
+    if (isClient) {
+      loginWithToken().then((user) => {
+        console.log(user);
+        if (user && user._id) {
+          console.log("HERE");
+          store.dispatch({
+            type: "LOGIN",
+            authenticated: user && !!user._id,
+            user,
+          });
+        }
       });
     }
 
