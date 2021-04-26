@@ -4,6 +4,8 @@ import { useMutation } from "@apollo/client";
 import { createDocument as createDocumentMutation } from "../../graphql/mutations/Documents.gql";
 import authenticatedRoute from "../../components/AuthenticatedRoute";
 import ValidatedForm from "../../components/ValidatedForm";
+import handleApolloResponse from "../../lib/handleApolloResponse";
+import pong from "../../lib/pong";
 
 import StyledCreateDocument from "./create.css";
 
@@ -21,19 +23,18 @@ const CreateDocument = () => {
           content,
         },
       },
-    })
-      .then(({ error, data }) => {
-        if (error) {
-          console.log(error);
-        }
-
-        if (data && data.createDocument && data.createDocument._id) {
-          router.push(`/documents/${data.createDocument._id}`);
-        }
-      })
-      .catch((error) => {
-        console.log({ error });
+    }).then((response) => {
+      return handleApolloResponse({
+        queryName: "createDocument",
+        response,
+        onSuccess: (data) => {
+          router.push(`/documents/${data._id}`);
+        },
+        onError: (error) => {
+          pong.danger(error);
+        },
       });
+    });
   };
 
   return (
