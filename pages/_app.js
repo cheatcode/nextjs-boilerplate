@@ -82,16 +82,12 @@ const GlobalStyle = createGlobalStyle`
 `;
 
 class App extends React.Component {
-  state = {
-    loading: true,
-  };
+  state = {};
 
   async componentDidMount() {
     if (isClient) {
       loginWithToken().then((user) => {
-        console.log(user);
         if (user && user._id) {
-          console.log("HERE");
           store.dispatch({
             type: "LOGIN",
             authenticated: user && !!user._id,
@@ -100,15 +96,10 @@ class App extends React.Component {
         }
       });
     }
-
-    this.setState({ loading: false });
   }
 
   render() {
     const { Component, pageProps } = this.props;
-    const { loading } = this.state;
-
-    if (loading) return <div />;
 
     return (
       <React.Fragment>

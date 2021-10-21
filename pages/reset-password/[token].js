@@ -80,7 +80,6 @@ class ResetPassword extends React.Component {
                 },
               }}
               onSubmit={() => {
-                console.log("running");
                 this.handleResetPassword();
               }}
             >
