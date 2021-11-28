@@ -11,7 +11,7 @@ const ViewDocument = () => {
   const documentId = router.query && router.query._id;
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
-  const { data } = useQuery(documentQuery, { variables: { documentId } });
+  const { data } = useQuery(documentQuery, { variables: { documentId }, fetchPolicy: 'network-only' });
 
   useEffect(() => {
     if (data && data.document) {

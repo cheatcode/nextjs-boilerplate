@@ -13,7 +13,9 @@ import StyledDocuments from "./index.css";
 
 const Documents = () => {
   const router = useRouter();
-  const { loading, error, data } = useQuery(documentsQuery);
+  const { loading, error, data } = useQuery(documentsQuery, {
+    fetchPolicy: 'network-only'
+  });
 
   if (error) {
     return <GraphQLError error={error} />;

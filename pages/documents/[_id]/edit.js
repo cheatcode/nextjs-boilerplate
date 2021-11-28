@@ -18,7 +18,7 @@ const EditDocument = () => {
   const documentId = router.query && router.query._id;
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
-  const { data } = useQuery(documentQuery, { variables: { documentId } });
+  const { data } = useQuery(documentQuery, { variables: { documentId }, fetchPolicy: 'network-only' });
   const [updateDocument] = useMutation(updateDocumentMutation);
   const [deleteDocument] = useMutation(deleteDocumentMutation);
 
