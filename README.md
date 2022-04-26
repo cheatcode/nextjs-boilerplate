@@ -4,6 +4,10 @@
 
 Front-end boilerplate for building web applications, based on [Next.js](https://nextjs.org).
 
+[Join the Discord](https://discord.gg/UTy4Fpy)
+
+---
+
 ### Table of Contents
 
 0. [Who is This For?](#who-is-this-for)
